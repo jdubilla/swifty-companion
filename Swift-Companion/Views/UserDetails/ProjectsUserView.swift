@@ -18,7 +18,7 @@ struct ProjectsUserView: View {
     
     var body: some View {
         SectionUserView(text: "Projets", color: $color)
-        Spacer().frame(height: 10)
+//        Spacer().frame(height: 10)
         VStack(spacing: 0) {
             Picker(projectsStatus[indexPicker], selection: $indexPicker) {
                 ForEach(0..<projectsStatus.count, id: \.self) { i in
@@ -31,19 +31,28 @@ struct ProjectsUserView: View {
             .clipShape(RoundedCorner(radius: 5))
             .padding(.horizontal)
             if let projects = request.user?.projects_users {
-                List(0..<projects.count, id: \.self) { index in
+//                List(0..<projects.count, id: \.self) { index in
+                ScrollView(.vertical) {
+                    
+                ForEach(projects) { project in
                     if (indexPicker == 0 &&
-                        projects[index].status == "finished" &&
-                        projects[index].cursus_ids.contains(21)) {
-                        ProjectListView(project: projects[index], color: color ?? .orange)
+                        project.status == "finished" &&
+                        project.cursus_ids.contains(21)) {
+                        ProjectListView(project: project, color: color ?? .orange)
                     } else if (indexPicker == 1 &&
-                               projects[index].status != "finished" &&
-                               projects[index].cursus_ids.contains(21)) {
-                        ProjectListView(project: projects[index], color: color ?? .orange)
+                               project.status != "finished" &&
+                               project.cursus_ids.contains(21)) {
+                        ProjectListView(project: project, color: color ?? .orange)
                     }
-                }.listStyle(.plain)
+                }
+                }.padding(.top)
+
+
+//                }.listStyle(.plain)
             }
-        }.frame(maxHeight: 270)
+        }
+        .padding()
+        .frame(maxHeight: 300)
     }
 }
 

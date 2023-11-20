@@ -16,7 +16,12 @@ struct ProjectListView: View {
         HStack {
             Text(project.project.name)
             Spacer()
-            if (project.status == "finished") {
+            if (project.status == "finished" &&
+                project.validated != nil && project.validated == false) {
+                if let final_mark = project.final_mark {
+                    TextStatusProjectView(text: String(final_mark), color: .red)
+                }
+            } else if (project.status == "finished") {
                 if let final_mark = project.final_mark {
                     TextStatusProjectView(text: String(final_mark), color: .green)
                 }
