@@ -12,13 +12,9 @@ struct SearchUserView: View {
     @Binding var isUserSearch: Bool
     @Binding var request: APIRequest
     
-    @State var username: String = ""
-    @State var showAlert = false
-    @State var disabled = false
-    
     var body: some View {
         if request.token != nil {
-            LoadedContentView(username: $username, showAlert: $showAlert, disabled: $disabled, isUserSearch: $isUserSearch, request: request)
+            LoadedContentView(isUserSearch: $isUserSearch, request: request)
         } else {
             LoadingView(request: request)
         }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProjectsUserView: View {
     
-    @Binding var color: Color?
+    @Binding var color: Color
     @Binding var request: APIRequest
     
     @State var indexPicker = 0
@@ -18,7 +18,6 @@ struct ProjectsUserView: View {
     
     var body: some View {
         SectionUserView(text: "Projets", color: $color)
-//        Spacer().frame(height: 10)
         VStack(spacing: 0) {
             Picker(projectsStatus[indexPicker], selection: $indexPicker) {
                 ForEach(0..<projectsStatus.count, id: \.self) { i in
@@ -27,28 +26,23 @@ struct ProjectsUserView: View {
                 }
             }
             .pickerStyle(.segmented)
-            .background(color ?? .white)
+            .background(color)
             .clipShape(RoundedCorner(radius: 5))
             .padding(.horizontal)
             if let projects = request.user?.projects_users {
-//                List(0..<projects.count, id: \.self) { index in
                 ScrollView(.vertical) {
-                    
-                ForEach(projects) { project in
-                    if (indexPicker == 0 &&
-                        project.status == "finished" &&
-                        project.cursus_ids.contains(21)) {
-                        ProjectListView(project: project, color: color ?? .orange)
-                    } else if (indexPicker == 1 &&
-                               project.status != "finished" &&
-                               project.cursus_ids.contains(21)) {
-                        ProjectListView(project: project, color: color ?? .orange)
+                    ForEach(projects) { project in
+                        if (indexPicker == 0 &&
+                            project.status == "finished" &&
+                            project.cursus_ids.contains(21)) {
+                            ProjectListView(project: project, color: color)
+                        } else if (indexPicker == 1 &&
+                                   project.status != "finished" &&
+                                   project.cursus_ids.contains(21)) {
+                            ProjectListView(project: project, color: color)
+                        }
                     }
-                }
                 }.padding(.top)
-
-
-//                }.listStyle(.plain)
             }
         }
         .padding()

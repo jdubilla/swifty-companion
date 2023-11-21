@@ -9,7 +9,7 @@ import SwiftUI
 
 struct UserLevelBarView: View {
     
-    @Binding var color: Color?
+    @Binding var color: Color
     @Binding var request: APIRequest
     
     let maxLevel: Double = 100
@@ -48,7 +48,7 @@ struct UserLevelBarView: View {
                 
             }
         }
-        .frame(maxHeight: 60)
+        .frame(height: 50)
         .onAppear() {
             userImageDownloader.getImage(path: request.user?.image.link ?? "")
         }

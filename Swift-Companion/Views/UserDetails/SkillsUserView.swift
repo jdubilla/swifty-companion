@@ -10,7 +10,7 @@ import Charts
 
 struct SkillsUserView: View {
     
-    @Binding var color: Color?
+    @Binding var color: Color
     @Binding var request: APIRequest
     
     var body: some View {
@@ -20,7 +20,6 @@ struct SkillsUserView: View {
         ScrollView(.horizontal) {
             HStack {
                 if let skills = request.user?.cursus_users[1].skills {
-                    
                     Chart {
                         ForEach(skills, id: \.self) { skill in
                             BarMark(x: .value("Type", skill.name), y: .value("Level", Int(skill.level)))
@@ -30,7 +29,7 @@ struct SkillsUserView: View {
                                         .foregroundStyle(Color.gray)
                                         .multilineTextAlignment(.center)
                                 }
-                                .foregroundStyle(color ?? Color.orange)
+                                .foregroundStyle(color)
                         }
                     }
                     .chartYScale(domain: 0...21)

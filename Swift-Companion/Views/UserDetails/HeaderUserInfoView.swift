@@ -11,7 +11,7 @@ struct HeaderUserInfoView: View {
     
     var image: String
     var text: String
-    @Binding var color: Color?
+    @Binding var color: Color
     
     var body: some View {
         HStack(spacing: 8) {

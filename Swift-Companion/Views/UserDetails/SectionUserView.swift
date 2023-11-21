@@ -10,7 +10,7 @@ import SwiftUI
 struct SectionUserView: View {
     
     var text: String
-    @Binding var color: Color?
+    @Binding var color: Color
     
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
@@ -25,7 +25,7 @@ struct SectionUserView: View {
             VStack(alignment: .trailing, spacing: 0) {
                 Rectangle()
                     .frame(height: 12)
-                    .foregroundStyle(color ?? .black)
+                    .foregroundStyle(color)
                     .shadow(radius: 10, x: 0, y : 10)
             }
         }

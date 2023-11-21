@@ -9,11 +9,12 @@ import SwiftUI
 
 struct LoadedContentView: View {
     
-    @Binding var username: String
-    @Binding var showAlert: Bool
-    @Binding var disabled: Bool
     @Binding var isUserSearch: Bool
     var request: APIRequest
+    
+    @State var disabled = false
+    @State var username = ""
+    @State var showAlert = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -27,24 +28,14 @@ struct LoadedContentView: View {
                     TextField("Login", text: $username)
                         .padding()
                         .background(Color.white)
-                        .clipShape(.rect(cornerRadius: 10))
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
                         .frame(width: 200)
                         .font(.title)
                         .multilineTextAlignment(.center)
                     Button("Rechercher") {
-                        Task {
-                            disabled = true
-                            await request.fetchDataUser(username: username)
-                            disabled = false
-                            if request.user != nil {
-                                isUserSearch = true
-                            } else {
-                                showAlert = true
-                                username = ""
-                            }
-                        }
+                            searchUser()
                     }
-                    .disabled(username.isEmpty || request.token == nil || disabled)
+//                    .disabled(username.isEmpty || request.token == nil || disabled)
                     .font(.system(size: 25))
                     .buttonStyle(.borderedProminent)
                 }
@@ -54,11 +45,23 @@ struct LoadedContentView: View {
                 } message: {
                     Text("Utilisateur introuvable")
                 }
-                
             }
             .onAppear() {
-                self.username = ""
                 request.checkAndFetchTokenIfNeeded()
+            }
+        }
+    }
+    
+    func searchUser() {
+        Task {
+            disabled = true
+            await request.fetchDataUser(username: username)
+            disabled = false
+            if request.user != nil {
+                isUserSearch = true
+            } else {
+                showAlert = true
+                username = ""
             }
         }
     }

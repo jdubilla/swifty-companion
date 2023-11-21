@@ -83,10 +83,10 @@ class APIRequest {
     }
     
     func userData(username: String) async throws -> User? {
-//        let testUsername = "jdubilla"
-//        let url = URL(string: "https://api.intra.42.fr/v2/users/\(testUsername.lowercased())")!
+        let testUsername = "jdubilla"
+        let url = URL(string: "https://api.intra.42.fr/v2/users/\(testUsername.lowercased())")!
 
-        let url = URL(string: "https://api.intra.42.fr/v2/users/\(username.lowercased())")!
+//        let url = URL(string: "https://api.intra.42.fr/v2/users/\(username.lowercased())")!
         
         var request = URLRequest(url: url)
         if let access_token = self.token?.access_token {
@@ -102,10 +102,10 @@ class APIRequest {
     }
     
     func coalitionsData(username: String) async throws -> [Coalition]? {
-//        let testUsername = "jdubilla"
-//        let url = URL(string: "https://api.intra.42.fr/v2/users/\(testUsername.lowercased())/coalitions")!
+        let testUsername = "jdubilla"
+        let url = URL(string: "https://api.intra.42.fr/v2/users/\(testUsername.lowercased())/coalitions")!
         
-        let url = URL(string: "https://api.intra.42.fr/v2/users/\(username.lowercased())/coalitions")!
+//        let url = URL(string: "https://api.intra.42.fr/v2/users/\(username.lowercased())/coalitions")!
         
         var request = URLRequest(url: url)
         if let access_token = self.token?.access_token {

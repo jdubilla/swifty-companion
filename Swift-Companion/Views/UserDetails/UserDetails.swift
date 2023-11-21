@@ -14,27 +14,25 @@ struct UserDetails: View {
     @Binding var isUserSearch: Bool
     @Binding var request: APIRequest
     
-    
-    @State var mainColor: Color?
+    @State var mainColor: Color = .orange
     
     var body: some View {
-
         VStack(spacing: 0) {
-                HeaderView(isUserSearch: $isUserSearch, request: $request, mainColor: $mainColor)
-                
-                UserLevelBarView(color: $mainColor, request: $request)
+            HeaderView(isUserSearch: $isUserSearch, request: $request, mainColor: $mainColor)
+            UserLevelBarView(color: $mainColor, request: $request)
             ScrollView(.vertical) {
-
                 ProjectsUserView(color: $mainColor, request: $request)
                 SkillsUserView(color: $mainColor, request: $request)
-//                SkillsUserView(color: $mainColor, request: $request)
-//                Spacer()
             }
-
-            }
+        }
         .ignoresSafeArea(.all)
         .onAppear() {
-            mainColor = Color(hex: request.coalitions?[1].color ?? "")
+            if let color = request.coalitions?.last?.color {
+                mainColor = Color(hex: color)
+            } else {
+                mainColor = Color.orange
+            }
+
         }
     }
 }

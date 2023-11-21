@@ -11,7 +11,7 @@ struct HeaderView: View {
     
     @Binding var isUserSearch: Bool
     @Binding var request: APIRequest
-    @Binding var mainColor: Color?
+    @Binding var mainColor: Color
     
     let bgImageDownloader: ImageDownloader = ImageDownloader()
     
