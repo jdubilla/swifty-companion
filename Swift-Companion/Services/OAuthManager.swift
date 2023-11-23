@@ -28,7 +28,6 @@ private var apiUID: String {
 class OAuthManager {
     
     var isAuthenticated = false
-//    var accessToken: String?
     var tokenInfos: ApiToken?
 
     func getToken(code: String) async {
@@ -72,7 +71,7 @@ class OAuthManager {
                     
                     let tokenResponse = try decoder.decode(ApiToken.self, from: data)
 //                    print("Token Response")
-                    print(tokenResponse)
+//                    print(tokenResponse)
                     
                     self.tokenInfos = tokenResponse
                     self.isAuthenticated = true
@@ -82,6 +81,80 @@ class OAuthManager {
             }
         }.resume()
     }
+    
+    func refreshToken() async {
+                
+        let urlString = "https://api.intra.42.fr/oauth/token"
+        guard let url = URL(string: urlString) else {
+            print("URL is invalid")
+            return
+        }
+        
+        let clientId = apiUID
+        let clientSecret = apiSecret
+        let redirectUri = "https://www.google.com/"
+        
+        guard let refreshToken = tokenInfos?.refresh_token else {
+            return
+        }
+        
+//        let bodyParameters = "grant_type=authorization_code&client_id=\(clientId)&client_secret=\(clientSecret)&code=\(code)&redirect_uri=\(redirectUri)"
+        
+        let bodyParameters = "grant_type=refresh_token&client_id=\(clientId)&client_secret=\(clientSecret)&refresh_token=\(refreshToken)&redirect_uri=\(redirectUri)"
+
+        guard let bodyData = bodyParameters.data(using: .utf8) else {
+            print("Failed to create body data")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = bodyData
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error: \(error)")
+                return
+            }
+            
+            if let data = data {
+                do {
+//                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+//                    print(json)
+                    
+                    let decoder = JSONDecoder()
+                    
+                    let tokenResponse = try decoder.decode(ApiToken.self, from: data)
+//                    print("Token Response")
+//                    print(tokenResponse)
+                    
+                    self.tokenInfos = tokenResponse
+                    self.isAuthenticated = true
+                } catch {
+                    print("JSON parsing error: \(error)")
+                }
+            }
+        }.resume()
+    }
+    
+    func checkAndFetchTokenIfNeeded() async {
+//        print("Check Token")
+        if self.tokenInfos?.access_token == nil || shouldRefreshToken() {
+//            print("Should refresh")
+            await self.refreshToken()
+        }
+    }
+    
+    func shouldRefreshToken() -> Bool {
+        let timestamp = Int(Date().timeIntervalSince1970)
+        
+        if let expiration = self.tokenInfos?.expires_in, let created_at = self.tokenInfos?.created_at, (created_at + expiration + 300) < timestamp {
+            return true
+        }
+        return false
+    }
+    
 }
 
 struct ApiToken: Decodable {

@@ -44,7 +44,10 @@ struct HeaderView: View {
                 VStack {
                     Spacer().frame(height: 60)
                     Button {
-                        isUserSearch = false
+                        withAnimation {
+                            isUserSearch = false
+                        }
+//                        isUserSearch = false
                     } label: {
                         Image(systemName: "xmark.circle.fill")
                             .resizable()

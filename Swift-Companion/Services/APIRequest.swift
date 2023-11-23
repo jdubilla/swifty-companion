@@ -10,64 +10,17 @@ import Foundation
 @Observable
 class APIRequest {
     
-    var token: String
+//    var token: String
+    var token: ApiToken
     var isFinish = false
     var user: User?
     var coalitions: [Coalition]?
     var locations: [Location]?
     
-    init(token: String) {
+    init(token: ApiToken) {
+        print(token.access_token)
         self.token = token
     }
-
-
-//    func fetchToken() {
-//        let url = URL(string: "https://api.intra.42.fr/oauth/token")!
-//        
-//        var request = URLRequest(url: url)
-//        request.httpMethod = "POST"
-//        
-//        let grantType = "client_credentials"
-//        let bodyString = "grant_type=\(grantType)&client_id=\(apiUID)&client_secret=\(apiSecret)"
-//        request.httpBody = bodyString.data(using: .utf8)
-//        
-//        
-//        let session = URLSession(configuration: .default)
-//        
-//        let task = session.dataTask(with: request) { data, response, error in
-//            guard let data = data, error == nil else {
-//                return
-//            }
-//            
-//            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-//                return
-//            }
-//            
-//            guard let responseJson = try? JSONDecoder().decode(TokenResponse.self, from: data) else {
-//                return
-//            }
-//            print(responseJson)
-//            self.token = responseJson
-//        }
-//        
-//        task.resume()
-//    }
-    
-//    func checkAndFetchTokenIfNeeded() {
-//        print("Check Token")
-//        if self.token == nil || shouldRefreshToken() {
-//            self.fetchToken()
-//        }
-//    }
-    
-//    func shouldRefreshToken() -> Bool {
-//        let timestamp = Int(Date().timeIntervalSince1970)
-//        
-//        if let expiration = self.token?.created_at, let created_at = self.token?.created_at, (created_at + expiration + 10) < timestamp {
-//            return true
-//        }
-//        return false
-//    }
     
     func userData(username: String) async throws -> User? {
         let testUsername = "jdubilla"
@@ -76,13 +29,8 @@ class APIRequest {
 //        let url = URL(string: "https://api.intra.42.fr/v2/users/\(username.lowercased())")!
         
         var request = URLRequest(url: url)
-//        if let access_token = self.token?.access_token {
-//            request.setValue("Bearer \(access_token)", forHTTPHeaderField: "Authorization")
-//        }
-        
-//        if let access_token = self.token?.access_token {
-            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-//        }
+
+        request.setValue("Bearer \(token.access_token)", forHTTPHeaderField: "Authorization")
 
         let (data, _) = try await URLSession.shared.data(for: request)
         let decoder = JSONDecoder()
@@ -99,13 +47,8 @@ class APIRequest {
 //        let url = URL(string: "https://api.intra.42.fr/v2/users/\(username.lowercased())/coalitions")!
         
         var request = URLRequest(url: url)
-//        if let access_token = self.token?.access_token {
-//            request.setValue("Bearer \(access_token)", forHTTPHeaderField: "Authorization")
-//        }
-        
-//        if let access_token = self.token?.access_token {
-            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-//        }
+
+            request.setValue("Bearer \(token.access_token)", forHTTPHeaderField: "Authorization")
 
         let (data, _) = try await URLSession.shared.data(for: request)
         let decoder = JSONDecoder()
@@ -120,24 +63,35 @@ class APIRequest {
         let url = URL(string: "https://api.intra.42.fr/v2/users/\(testUsername.lowercased())/locations")!
 
 //        let url = URL(string: "https://api.intra.42.fr/v2/users/\(username.lowercased())/locations")!
-        
         var request = URLRequest(url: url)
-        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        
+        request.setValue("Bearer \(token.access_token)", forHTTPHeaderField: "Authorization")
         let (data, _) = try await URLSession.shared.data(for: request)
         let decoder = JSONDecoder()
-        
         let locations = try decoder.decode([Location].self, from: data)
-        print(locations)
+//        print(locations)
+        
+//        print(String(data: data, encoding: .utf8)!) // Affiche les données brutes
+        
+//        do {
+//            let locations = try decoder.decode([Location].self, from: data)
+////            print(locations)
+//            return locations
+//        } catch {
+//            print("Error decoding data: \(error)")
+//            throw error
+//        }
         
         return locations
     }
     
     func fetchDataUser(username: String) async {
         do {
+            isFinish = false
             self.user = try await userData(username: username)
             self.coalitions = try await coalitionsData(username: username)
+            try await Task.sleep(nanoseconds: 1_000_000_000) // Attente d'une seconde (en millisecondes)
             self.locations = try await locationsUser(username: username)
+            isFinish = true
         } catch {
             self.user = nil
             print("Error: User not found")
