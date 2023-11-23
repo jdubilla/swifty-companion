@@ -23,6 +23,7 @@ struct UserDetails: View {
             ScrollView(.vertical) {
                 ProjectsUserView(color: $mainColor, request: $request)
                 SkillsUserView(color: $mainColor, request: $request)
+                LocationsUserView(color: $mainColor, request: $request)
             }
         }
         .ignoresSafeArea(.all)

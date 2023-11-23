@@ -28,7 +28,8 @@ private var apiUID: String {
 class OAuthManager {
     
     var isAuthenticated = false
-    var accessToken: String?
+//    var accessToken: String?
+    var tokenInfos: ApiToken?
 
     func getToken(code: String) async {
                 
@@ -43,6 +44,9 @@ class OAuthManager {
         let redirectUri = "https://www.google.com/"
         
         let bodyParameters = "grant_type=authorization_code&client_id=\(clientId)&client_secret=\(clientSecret)&code=\(code)&redirect_uri=\(redirectUri)"
+        
+//        let bodyParameters = "grant_type=refresh_token&client_id=\(clientId)&client_secret=\(clientSecret)&refresh_token=4b1f1994590f54948ddb849a5ccc902bb3e3e1e94ae732952c4179f16e25eebe&redirect_uri=\(redirectUri)"
+
         guard let bodyData = bodyParameters.data(using: .utf8) else {
             print("Failed to create body data")
             return
@@ -59,10 +63,6 @@ class OAuthManager {
                 return
             }
             
-//            if let response = response as? HTTPURLResponse {
-//                print("Status code: \(response.statusCode)")
-//            }
-            
             if let data = data {
                 do {
 //                    let json = try JSONSerialization.jsonObject(with: data, options: [])
@@ -72,9 +72,9 @@ class OAuthManager {
                     
                     let tokenResponse = try decoder.decode(ApiToken.self, from: data)
 //                    print("Token Response")
-//                    print(tokenResponse.access_token)
+                    print(tokenResponse)
                     
-                    self.accessToken = tokenResponse.access_token
+                    self.tokenInfos = tokenResponse
                     self.isAuthenticated = true
                 } catch {
                     print("JSON parsing error: \(error)")
@@ -86,4 +86,7 @@ class OAuthManager {
 
 struct ApiToken: Decodable {
     var access_token: String
+    var created_at: Int
+    var expires_in: Int
+    var refresh_token: String
 }

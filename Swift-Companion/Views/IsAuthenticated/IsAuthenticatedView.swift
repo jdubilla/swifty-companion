@@ -18,16 +18,16 @@ struct IsAuthenticatedView: View {
         if (!isUserSearch) {
             SearchUserView(isUserSearch: $isUserSearch, request: $request)
                 .onAppear() {
-                    if request == nil, let accessToken = oAuth.accessToken {
+                    if request == nil, let accessToken = oAuth.tokenInfos?.access_token {
                         request = APIRequest(token: accessToken)
                     }
+                    // Faire les verifs du token ici
                 }
         } else {
             UserDetails(isUserSearch: $isUserSearch, request: $request)
+                .onAppear() {
+                    // Faire les verifs du token ici
+                }
         }
     }
 }
-
-//#Preview {
-//    IsAuthenticatedView()
-//}

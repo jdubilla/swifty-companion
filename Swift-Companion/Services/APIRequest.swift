@@ -7,32 +7,14 @@
 
 import Foundation
 
-//private func getValue(forKey key: String) -> String {
-//    guard let filePath = Bundle.main.path(forResource: "InfosAPI", ofType: "plist"),
-//          let plist = NSDictionary(contentsOfFile: filePath),
-//          let value = plist.object(forKey: key) as? String else {
-//        fatalError("Couldn't find key '\(key)' in 'Info'.")
-//    }
-//    return value
-//}
-//
-//private var apiSecret: String {
-//    return getValue(forKey: "API_SECRET")
-//}
-//
-//private var apiUID: String {
-//    return getValue(forKey: "API_UID")
-//}
-
-
 @Observable
 class APIRequest {
     
-//    var token: TokenResponse?
     var token: String
     var isFinish = false
     var user: User?
     var coalitions: [Coalition]?
+    var locations: [Location]?
     
     init(token: String) {
         self.token = token
@@ -133,10 +115,29 @@ class APIRequest {
         return currUser
     }
     
+    func locationsUser(username: String) async throws -> [Location] {
+        let testUsername = "jdubilla"
+        let url = URL(string: "https://api.intra.42.fr/v2/users/\(testUsername.lowercased())/locations")!
+
+//        let url = URL(string: "https://api.intra.42.fr/v2/users/\(username.lowercased())/locations")!
+        
+        var request = URLRequest(url: url)
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        let (data, _) = try await URLSession.shared.data(for: request)
+        let decoder = JSONDecoder()
+        
+        let locations = try decoder.decode([Location].self, from: data)
+        print(locations)
+        
+        return locations
+    }
+    
     func fetchDataUser(username: String) async {
         do {
             self.user = try await userData(username: username)
             self.coalitions = try await coalitionsData(username: username)
+            self.locations = try await locationsUser(username: username)
         } catch {
             self.user = nil
             print("Error: User not found")
@@ -144,6 +145,11 @@ class APIRequest {
     }
 }
 
+struct Location: Decodable, Hashable {
+    var begin_at: String
+    var end_at: String
+    var host: String
+}
 
 struct User: Decodable {
     var login, first_name, last_name, email: String
@@ -206,14 +212,3 @@ struct Coalition: Decodable {
         case color
     }
 }
-
-
-
-
-
-
-
-
-
-
-
