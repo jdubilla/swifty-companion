@@ -9,15 +9,31 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var request: APIRequest = APIRequest()
-    @State var isUserSearch = false
+//    @State var isAuthenticated = false
+    @State var oAuth: OAuthManager = OAuthManager()
+
     
+//    @State var request: APIRequest = APIRequest()
+//    @State var isUserSearch = false
+
     var body: some View {
-        if (!isUserSearch) {
-            SearchUserView(isUserSearch: $isUserSearch, request: $request)
+        if !oAuth.isAuthenticated {
+            AuthenticatedView(oAuth: $oAuth)
         } else {
-            UserDetails(isUserSearch: $isUserSearch, request: $request)
+            IsAuthenticatedView(oAuth: $oAuth)
         }
+        
+        
+//        else if (!isUserSearch) {
+//            SearchUserView(isUserSearch: $isUserSearch, request: $request)
+//        } else {
+//            UserDetails(isUserSearch: $isUserSearch, request: $request)
+//        }
+        
+        
+//        AuthenticatedView()
+        
+        
     }
 }
 

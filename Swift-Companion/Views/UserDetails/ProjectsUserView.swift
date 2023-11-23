@@ -10,7 +10,7 @@ import SwiftUI
 struct ProjectsUserView: View {
     
     @Binding var color: Color
-    @Binding var request: APIRequest
+    @Binding var request: APIRequest?
     
     @State var indexPicker = 0
     
@@ -29,7 +29,7 @@ struct ProjectsUserView: View {
             .background(color)
             .clipShape(RoundedCorner(radius: 5))
             .padding(.horizontal)
-            if let projects = request.user?.projects_users {
+            if let projects = request?.user?.projects_users {
                 ScrollView(.vertical) {
                     ForEach(projects) { project in
                         if (indexPicker == 0 &&
@@ -50,6 +50,6 @@ struct ProjectsUserView: View {
     }
 }
 
-#Preview {
-    ProjectsUserView(color: .constant(Color.purple), request: .constant(APIRequest()))
-}
+//#Preview {
+//    ProjectsUserView(color: .constant(Color.purple), request: .constant(APIRequest()))
+//}

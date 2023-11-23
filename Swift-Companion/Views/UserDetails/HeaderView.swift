@@ -10,7 +10,7 @@ import SwiftUI
 struct HeaderView: View {
     
     @Binding var isUserSearch: Bool
-    @Binding var request: APIRequest
+    @Binding var request: APIRequest?
     @Binding var mainColor: Color
     
     let bgImageDownloader: ImageDownloader = ImageDownloader()
@@ -28,12 +28,12 @@ struct HeaderView: View {
             }
             HStack {
                 VStack(alignment: .center) {
-                    SVGImage(url: URL(string: request.coalitions?[1].imageUrl ?? "")!)
+                    SVGImage(url: URL(string: request?.coalitions?[1].imageUrl ?? "")!)
                 }
                 .frame(width: 100)
                 VStack(alignment: .leading) {
                     Spacer().frame(height: 25)
-                    if let user = request.user {
+                    if let user = request?.user {
                         HeaderUserInfoView(image: "person.fill", text: user.login, color: $mainColor)
                         HeaderUserInfoView(image: "envelope.circle", text: user.email, color: $mainColor)
                         HeaderUserInfoView(image: "dollarsign.circle.fill", text: "\(String(user.wallet)) ₳", color: $mainColor)
@@ -58,8 +58,8 @@ struct HeaderView: View {
                 .frame(width: 40, height: 200)
             }.frame(maxWidth: .infinity)
         }.onAppear() {
-            bgImageDownloader.getImage(path: request.coalitions?[1].coverUrl ?? "")
-            print(request.user?.cursus_users[1].skills ?? "")
+            bgImageDownloader.getImage(path: request?.coalitions?[1].coverUrl ?? "")
+//            print(request?.user?.cursus_users[1].skills ?? "")
         }
     }
 }

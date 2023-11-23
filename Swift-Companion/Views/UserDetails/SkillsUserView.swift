@@ -11,7 +11,7 @@ import Charts
 struct SkillsUserView: View {
     
     @Binding var color: Color
-    @Binding var request: APIRequest
+    @Binding var request: APIRequest?
     
     var body: some View {
         Spacer().frame(height: 10)
@@ -19,7 +19,7 @@ struct SkillsUserView: View {
         
         ScrollView(.horizontal) {
             HStack {
-                if let skills = request.user?.cursus_users[1].skills {
+                if let skills = request?.user?.cursus_users[1].skills {
                     Chart {
                         ForEach(skills, id: \.self) { skill in
                             BarMark(x: .value("Type", skill.name), y: .value("Level", Int(skill.level)))

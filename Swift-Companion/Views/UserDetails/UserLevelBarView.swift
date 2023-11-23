@@ -10,7 +10,7 @@ import SwiftUI
 struct UserLevelBarView: View {
     
     @Binding var color: Color
-    @Binding var request: APIRequest
+    @Binding var request: APIRequest?
     
     let maxLevel: Double = 100
     
@@ -31,7 +31,7 @@ struct UserLevelBarView: View {
                         .frame(width: min(CGFloat((getDecimalPart() / self.maxLevel) * (geometry.size.width)), geometry.size.width), height: 20)
                         .foregroundColor(color)
                     
-                    Text(String(request.user?.cursus_users[1].level ?? 0.0))
+                    Text(String(request?.user?.cursus_users[1].level ?? 0.0))
                         .foregroundStyle(.white)
                         .fontWeight(.bold)
                         .offset(x: 20)
@@ -50,15 +50,15 @@ struct UserLevelBarView: View {
         }
         .frame(height: 50)
         .onAppear() {
-            userImageDownloader.getImage(path: request.user?.image.link ?? "")
+            userImageDownloader.getImage(path: request?.user?.image.link ?? "")
         }
     }
     
     func getDecimalPart() -> Double {
-        let number: Double = request.user?.cursus_users[1].level ?? 0.0
-        print(number)
+        let number: Double = request?.user?.cursus_users[1].level ?? 0.0
+//        print(number)
         let decimalPart = Double((number.truncatingRemainder(dividingBy: 1)) * 100)
-        print(decimalPart)
+//        print(decimalPart)
         return decimalPart
     }
 }

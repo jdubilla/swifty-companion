@@ -10,7 +10,7 @@ import SwiftUI
 struct LoadedContentView: View {
     
     @Binding var isUserSearch: Bool
-    var request: APIRequest
+    var request: APIRequest?
     
     @State var disabled = false
     @State var username = ""
@@ -46,18 +46,18 @@ struct LoadedContentView: View {
                     Text("Utilisateur introuvable")
                 }
             }
-            .onAppear() {
-                request.checkAndFetchTokenIfNeeded()
-            }
+//            .onAppear() {
+//                request.checkAndFetchTokenIfNeeded()
+//            }
         }
     }
     
     func searchUser() {
         Task {
             disabled = true
-            await request.fetchDataUser(username: username)
+            await request?.fetchDataUser(username: username)
             disabled = false
-            if request.user != nil {
+            if request?.user != nil {
                 isUserSearch = true
             } else {
                 showAlert = true

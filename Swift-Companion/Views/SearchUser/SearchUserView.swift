@@ -10,10 +10,10 @@ import SwiftUI
 struct SearchUserView: View {
     
     @Binding var isUserSearch: Bool
-    @Binding var request: APIRequest
+    @Binding var request: APIRequest?
     
     var body: some View {
-        if request.token != nil {
+        if request?.token != nil {
             LoadedContentView(isUserSearch: $isUserSearch, request: request)
         } else {
             LoadingView(request: request)
@@ -21,6 +21,6 @@ struct SearchUserView: View {
     }
 }
 
-#Preview {
-    SearchUserView(isUserSearch: .constant(false), request: .constant(APIRequest()))
-}
+//#Preview {
+//    SearchUserView(isUserSearch: .constant(false), request: .constant(APIRequest()))
+//}

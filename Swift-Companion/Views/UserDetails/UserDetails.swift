@@ -12,7 +12,7 @@ import WebKit
 struct UserDetails: View {
     
     @Binding var isUserSearch: Bool
-    @Binding var request: APIRequest
+    @Binding var request: APIRequest?
     
     @State var mainColor: Color = .orange
     
@@ -27,7 +27,7 @@ struct UserDetails: View {
         }
         .ignoresSafeArea(.all)
         .onAppear() {
-            if let color = request.coalitions?.last?.color {
+            if let color = request?.coalitions?.last?.color {
                 mainColor = Color(hex: color)
             } else {
                 mainColor = Color.orange
