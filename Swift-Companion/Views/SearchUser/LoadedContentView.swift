@@ -46,7 +46,7 @@ struct LoadedContentView: View {
                     Button("Rechercher") {
                             searchUser()
                     }
-                    .disabled(username.isEmpty || request?.token == nil || disabled)
+//                    .disabled(username.isEmpty || request?.token == nil || disabled)
                     .font(.system(size: 25))
                     .buttonStyle(.borderedProminent)
                 }

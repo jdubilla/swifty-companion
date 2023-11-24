@@ -68,7 +68,7 @@ class APIRequest {
         let (data, _) = try await URLSession.shared.data(for: request)
         let decoder = JSONDecoder()
         let locations = try decoder.decode([Location].self, from: data)
-//        print(locations)
+        print(locations)
         
 //        print(String(data: data, encoding: .utf8)!) // Affiche les données brutes
         
