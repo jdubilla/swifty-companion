@@ -23,10 +23,10 @@ class APIRequest {
     }
     
     func userData(username: String) async throws -> User? {
-        let testUsername = "jdubilla"
-        let url = URL(string: "https://api.intra.42.fr/v2/users/\(testUsername.lowercased())")!
+//        let testUsername = "jdubilla"
+//        let url = URL(string: "https://api.intra.42.fr/v2/users/\(testUsername.lowercased())")!
 
-//        let url = URL(string: "https://api.intra.42.fr/v2/users/\(username.lowercased())")!
+        let url = URL(string: "https://api.intra.42.fr/v2/users/\(username.lowercased())")!
         
         var request = URLRequest(url: url)
 
@@ -41,10 +41,10 @@ class APIRequest {
     }
     
     func coalitionsData(username: String) async throws -> [Coalition]? {
-        let testUsername = "jdubilla"
-        let url = URL(string: "https://api.intra.42.fr/v2/users/\(testUsername.lowercased())/coalitions")!
+//        let testUsername = "jdubilla"
+//        let url = URL(string: "https://api.intra.42.fr/v2/users/\(testUsername.lowercased())/coalitions")!
         
-//        let url = URL(string: "https://api.intra.42.fr/v2/users/\(username.lowercased())/coalitions")!
+        let url = URL(string: "https://api.intra.42.fr/v2/users/\(username.lowercased())/coalitions")!
         
         var request = URLRequest(url: url)
 
@@ -53,22 +53,36 @@ class APIRequest {
         let (data, _) = try await URLSession.shared.data(for: request)
         let decoder = JSONDecoder()
         
-        let currUser = try decoder.decode([Coalition].self, from: data)
+        var coaUser = try decoder.decode([Coalition].self, from: data)
+        
+//         45 46 47 48
+        
 
-        return currUser
+        // Filtrer les éléments à déplacer vers la fin du tableau
+        let elementsToMove = coaUser.filter { [45, 46, 47, 48].contains($0.id) }
+
+        // Retirer les éléments du tableau
+        coaUser = coaUser.filter { ![45, 46, 47, 48].contains($0.id) }
+
+        // Ajouter les éléments à la fin du tableau
+        coaUser.append(contentsOf: elementsToMove)
+        
+        return coaUser
     }
     
     func locationsUser(username: String) async throws -> [Location] {
-        let testUsername = "jdubilla"
-        let url = URL(string: "https://api.intra.42.fr/v2/users/\(testUsername.lowercased())/locations")!
+//        let testUsername = "jdubilla"
+//        let url = URL(string: "https://api.intra.42.fr/v2/users/\(testUsername.lowercased())/locations")!
 
-//        let url = URL(string: "https://api.intra.42.fr/v2/users/\(username.lowercased())/locations")!
+        let url = URL(string: "https://api.intra.42.fr/v2/users/\(username.lowercased())/locations")!
+        
         var request = URLRequest(url: url)
         request.setValue("Bearer \(token.access_token)", forHTTPHeaderField: "Authorization")
         let (data, _) = try await URLSession.shared.data(for: request)
         let decoder = JSONDecoder()
+//        print(String(data: data, encoding: .utf8)!) // Affiche les données brutes
         let locations = try decoder.decode([Location].self, from: data)
-        print(locations)
+//        print(locations)
         
 //        print(String(data: data, encoding: .utf8)!) // Affiche les données brutes
         
@@ -88,9 +102,12 @@ class APIRequest {
         do {
             isFinish = false
             self.user = try await userData(username: username)
+            print("1")
             self.coalitions = try await coalitionsData(username: username)
+            print("2")
             try await Task.sleep(nanoseconds: 1_000_000_000) // Attente d'une seconde (en millisecondes)
             self.locations = try await locationsUser(username: username)
+            print("3")
             isFinish = true
         } catch {
             self.user = nil
@@ -101,7 +118,7 @@ class APIRequest {
 
 struct Location: Decodable, Hashable {
     var begin_at: String
-    var end_at: String
+    var end_at: String?
     var host: String
 }
 
@@ -142,6 +159,7 @@ struct ImageUser: Decodable {
 }
 
 struct CursusUser: Decodable {
+    var cursus_id: Int
     var grade: String?
     var level: Double
     var skills: [Skills]

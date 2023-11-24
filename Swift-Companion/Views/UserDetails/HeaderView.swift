@@ -28,7 +28,7 @@ struct HeaderView: View {
             }
             HStack {
                 VStack(alignment: .center) {
-                    SVGImage(url: URL(string: request?.coalitions?[1].imageUrl ?? "")!)
+                    SVGImage(url: URL(string: request?.coalitions?.last?.imageUrl ?? "")!)
                 }
                 .frame(width: 100)
                 VStack(alignment: .leading) {
@@ -40,14 +40,14 @@ struct HeaderView: View {
                         HeaderUserInfoView(image: "pc", text: String(user.location ?? " Unavailable"), color: $mainColor)
                     }
                 }
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: 240)
+//                .frame(maxWidth: .infinity)
                 VStack {
                     Spacer().frame(height: 60)
                     Button {
                         withAnimation {
                             isUserSearch = false
                         }
-//                        isUserSearch = false
                     } label: {
                         Image(systemName: "xmark.circle.fill")
                             .resizable()
@@ -61,8 +61,8 @@ struct HeaderView: View {
                 .frame(width: 40, height: 200)
             }.frame(maxWidth: .infinity)
         }.onAppear() {
-            bgImageDownloader.getImage(path: request?.coalitions?[1].coverUrl ?? "")
-//            print(request?.user?.cursus_users[1].skills ?? "")
+            print(request?.coalitions?.last?.imageUrl ?? "No img")
+            bgImageDownloader.getImage(path: request?.coalitions?.last?.coverUrl ?? "")
         }
     }
 }

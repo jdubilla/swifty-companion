@@ -15,7 +15,7 @@ struct LoadedContentView: View {
     @State var disabled = false
     @State var username = ""
     @State var showAlert = false
-//    @FocusState private var textfieldFocused: Bool
+    @FocusState private var textfieldFocused: Bool
     
     var body: some View {
         GeometryReader { geometry in
@@ -33,10 +33,10 @@ struct LoadedContentView: View {
                         .frame(width: 200)
                         .font(.title)
                         .multilineTextAlignment(.center)
-//                        .focused($textfieldFocused)
-//                        .onLongPressGesture(minimumDuration: 0.0) {
-//                            textfieldFocused = true
-//                        }
+                        .focused($textfieldFocused)
+                        .onLongPressGesture(minimumDuration: 0.0) {
+                            textfieldFocused = true
+                        }
                         .autocorrectionDisabled()
                         .onChange(of: username) { oldValue, newValue in
                             if newValue.count > 15 {
@@ -46,7 +46,7 @@ struct LoadedContentView: View {
                     Button("Rechercher") {
                             searchUser()
                     }
-//                    .disabled(username.isEmpty || request?.token == nil || disabled)
+                    .disabled(username.isEmpty || request?.token == nil || disabled)
                     .font(.system(size: 25))
                     .buttonStyle(.borderedProminent)
                 }
@@ -70,6 +70,7 @@ struct LoadedContentView: View {
                     isUserSearch = true
                 }
             } else {
+                textfieldFocused = false
                 showAlert = true
                 username = ""
             }

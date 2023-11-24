@@ -16,10 +16,9 @@ struct SkillsUserView: View {
     var body: some View {
         Spacer().frame(height: 10)
         SectionUserView(text: "Skills", color: $color)
-        
         ScrollView(.horizontal) {
-            HStack {
-                if let skills = request?.user?.cursus_users[1].skills {
+            if let skills = request?.user?.cursus_users.last?.skills, skills.count > 0 {
+                HStack {
                     Chart {
                         ForEach(skills, id: \.self) { skill in
                             BarMark(x: .value("Type", skill.name), y: .value("Level", Int(skill.level)))
@@ -31,16 +30,14 @@ struct SkillsUserView: View {
                                 }
                                 .foregroundStyle(color)
                         }
-                    }
-                    .chartYScale(domain: 0...21)
-                }
-            }.frame(minWidth: 1000, minHeight: 200)
-            
+                    }.chartYScale(domain: 0...21)
+                }.frame(minWidth: 1000, minHeight: 200)
+            }
+            else {
+                    Text("Pas de skills (pour l'instant 👀)")
+            }
         }
         .padding()
     }
 }
 
-//#Preview {
-//    SkillsUserView()
-//}

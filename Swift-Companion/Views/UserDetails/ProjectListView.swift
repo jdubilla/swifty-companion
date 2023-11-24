@@ -35,8 +35,18 @@ struct ProjectListView: View {
         }
         .padding(4)
         .listRowSeparator(.hidden)
-        .background(project.status == "finished" ? Color(hex: "#32CD32").opacity(0.1) : color.opacity(0.1))
+        .background(getBackgroundColor())
         .clipShape(RoundedRectangle(cornerRadius: 5))
+    }
+    
+    func getBackgroundColor() -> Color {
+        if (project.status == "finished" && project.validated == true) {
+            return Color(hex: "#32CD32").opacity(0.1)
+        } else if (project.status == "finished" && project.validated == false) {
+            return Color.red.opacity(0.1)
+        } else {
+            return color.opacity(0.1)
+        }
     }
 }
 

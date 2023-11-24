@@ -21,7 +21,11 @@ struct LocationsUserView: View {
                         Text(formatDate(dateString: location.begin_at))
                         Text(location.host.capitalized)
                         Spacer()
-                        Text(calculateHourDifference(beginDateString: location.begin_at,endDateString: location.end_at))
+                        if let endAt = location.end_at {
+                            Text(calculateHourDifference(beginDateString: location.begin_at,endDateString: endAt))
+                        } else {
+                            Text("Session en cours")
+                        }
                     }
                 }.listStyle(.plain)
             } else {

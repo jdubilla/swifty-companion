@@ -13,15 +13,17 @@ struct ProjectsUserView: View {
     @Binding var request: APIRequest?
     
     @State var indexPicker = 0
+    @State var maxCursusId: Int = 0
     
     var projectsStatus = ["Finished", "Others"]
+    var projectsStatusTranslate = ["Finis", "En cours"]
     
     var body: some View {
         SectionUserView(text: "Projets", color: $color)
         VStack(spacing: 0) {
             Picker(projectsStatus[indexPicker], selection: $indexPicker) {
                 ForEach(0..<projectsStatus.count, id: \.self) { i in
-                    Text(projectsStatus[i])
+                    Text(projectsStatusTranslate[i])
                         .fontWeight(.bold)
                 }
             }
@@ -34,22 +36,23 @@ struct ProjectsUserView: View {
                     ForEach(projects) { project in
                         if (indexPicker == 0 &&
                             project.status == "finished" &&
-                            project.cursus_ids.contains(21)) {
+                            project.cursus_ids.contains(maxCursusId)) {
                             ProjectListView(project: project, color: color)
                         } else if (indexPicker == 1 &&
                                    project.status != "finished" &&
-                                   project.cursus_ids.contains(21)) {
+                                   project.cursus_ids.contains(maxCursusId)) {
                             ProjectListView(project: project, color: color)
                         }
                     }
                 }.padding(.top)
             }
         }
+        .onAppear() {
+            maxCursusId = request?.user!.cursus_users.last?.cursus_id ?? 0
+            maxCursusId = maxCursusId > 21 ? 21 : maxCursusId
+        }
         .padding()
         .frame(maxHeight: 300)
     }
 }
 
-//#Preview {
-//    ProjectsUserView(color: .constant(Color.purple), request: .constant(APIRequest()))
-//}

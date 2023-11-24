@@ -31,7 +31,7 @@ struct UserLevelBarView: View {
                         .frame(width: min(CGFloat((getDecimalPart() / self.maxLevel) * (geometry.size.width)), geometry.size.width), height: 20)
                         .foregroundColor(color)
                     
-                    Text(String(request?.user?.cursus_users[1].level ?? 0.0))
+                    Text(String(request?.user?.cursus_users.last?.level ?? 0.0))
                         .foregroundStyle(.white)
                         .fontWeight(.bold)
                         .offset(x: 20)
@@ -55,7 +55,7 @@ struct UserLevelBarView: View {
     }
     
     func getDecimalPart() -> Double {
-        let number: Double = request?.user?.cursus_users[1].level ?? 0.0
+        let number: Double = request?.user?.cursus_users.last?.level ?? 0.0
 //        print(number)
         let decimalPart = Double((number.truncatingRemainder(dividingBy: 1)) * 100)
 //        print(decimalPart)
