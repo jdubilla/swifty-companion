@@ -33,7 +33,6 @@ struct UserDetails: View {
             } else {
                 mainColor = Color.orange
             }
-
         }
     }
 }

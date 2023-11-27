@@ -149,7 +149,9 @@ class OAuthManager {
     func shouldRefreshToken() -> Bool {
         let timestamp = Int(Date().timeIntervalSince1970)
         
-        if let expiration = self.tokenInfos?.expires_in, let created_at = self.tokenInfos?.created_at, (created_at + expiration + 300) < timestamp {
+        if let expiration = self.tokenInfos?.expires_in, let created_at = self.tokenInfos?.created_at, (created_at + expiration) < (timestamp + 300) {
+//            print(created_at + expiration)
+//            print(timestamp + 300)
             return true
         }
         return false
@@ -163,3 +165,7 @@ struct ApiToken: Decodable {
     var expires_in: Int
     var refresh_token: String
 }
+
+
+//jeton expire a 1500 + 1000
+//nous sommes a 2000
