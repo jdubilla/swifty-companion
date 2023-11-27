@@ -39,6 +39,11 @@ class APIRequest {
     
     func coalitionsData(username: String) async throws -> [Coalition]? {
         
+        print("1")
+        print(username)
+        print(token.access_token)
+        print("2")
+        
         let url = URL(string: "https://api.intra.42.fr/v2/users/\(username.lowercased())/coalitions")!
         
         var request = URLRequest(url: url)
