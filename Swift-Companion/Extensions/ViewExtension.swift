@@ -17,8 +17,6 @@ struct RoundedCorner: Shape {
     }
 }
 
-//Next, we will add extension to View and using clipShape modifier, we will clip our view:
-
 extension View {
     func roundedCorner(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape(RoundedCorner(radius: radius, corners: corners) )

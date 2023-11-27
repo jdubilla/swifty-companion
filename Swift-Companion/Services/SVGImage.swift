@@ -34,22 +34,6 @@ struct SVGImage: View {
     }
 }
 
-//#Preview {
-//    SVGImageView()
-//}
-
-//// MARK: Convert Strings
-//extension String {
-//    /// convert string in http url
-//    public var asUrl: URL {
-//        let urlStr = self.replacingOccurrences(of: " ", with: "%20")
-//        guard let url = URL(string: urlStr) else {
-//            return URL.init(fileURLWithPath:  "")
-//        }
-//        return url
-//    }
-//}
-
 @objc
 class CGSVGDocument: NSObject { }
 

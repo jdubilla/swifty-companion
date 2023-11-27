@@ -43,8 +43,6 @@ class OAuthManager {
         let redirectUri = "https://www.google.com/"
         
         let bodyParameters = "grant_type=authorization_code&client_id=\(clientId)&client_secret=\(clientSecret)&code=\(code)&redirect_uri=\(redirectUri)"
-        
-//        let bodyParameters = "grant_type=refresh_token&client_id=\(clientId)&client_secret=\(clientSecret)&refresh_token=4b1f1994590f54948ddb849a5ccc902bb3e3e1e94ae732952c4179f16e25eebe&redirect_uri=\(redirectUri)"
 
         guard let bodyData = bodyParameters.data(using: .utf8) else {
             print("Failed to create body data")
@@ -64,14 +62,9 @@ class OAuthManager {
             
             if let data = data {
                 do {
-//                    let json = try JSONSerialization.jsonObject(with: data, options: [])
-//                    print(json)
-                    
                     let decoder = JSONDecoder()
                     
                     let tokenResponse = try decoder.decode(ApiToken.self, from: data)
-//                    print("Token Response")
-//                    print(tokenResponse)
                     
                     self.tokenInfos = tokenResponse
                     self.isAuthenticated = true
@@ -98,8 +91,6 @@ class OAuthManager {
             return
         }
         
-//        let bodyParameters = "grant_type=authorization_code&client_id=\(clientId)&client_secret=\(clientSecret)&code=\(code)&redirect_uri=\(redirectUri)"
-        
         let bodyParameters = "grant_type=refresh_token&client_id=\(clientId)&client_secret=\(clientSecret)&refresh_token=\(refreshToken)&redirect_uri=\(redirectUri)"
 
         guard let bodyData = bodyParameters.data(using: .utf8) else {
@@ -120,14 +111,9 @@ class OAuthManager {
             
             if let data = data {
                 do {
-//                    let json = try JSONSerialization.jsonObject(with: data, options: [])
-//                    print(json)
-                    
                     let decoder = JSONDecoder()
                     
                     let tokenResponse = try decoder.decode(ApiToken.self, from: data)
-//                    print("Token Response")
-//                    print(tokenResponse)
                     
                     self.tokenInfos = tokenResponse
                     self.isAuthenticated = true
@@ -139,9 +125,7 @@ class OAuthManager {
     }
     
     func checkAndFetchTokenIfNeeded() async {
-//        print("Check Token")
         if self.tokenInfos?.access_token == nil || shouldRefreshToken() {
-//            print("Should refresh")
             await self.refreshToken()
         }
     }
@@ -150,22 +134,9 @@ class OAuthManager {
         let timestamp = Int(Date().timeIntervalSince1970)
         
         if let expiration = self.tokenInfos?.expires_in, let created_at = self.tokenInfos?.created_at, (created_at + expiration) < (timestamp + 300) {
-//            print(created_at + expiration)
-//            print(timestamp + 300)
             return true
         }
         return false
     }
     
 }
-
-struct ApiToken: Decodable {
-    var access_token: String
-    var created_at: Int
-    var expires_in: Int
-    var refresh_token: String
-}
-
-
-//jeton expire a 1500 + 1000
-//nous sommes a 2000

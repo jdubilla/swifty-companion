@@ -27,7 +27,6 @@ struct AuthenticatedView: View {
                     .onChange(of: receivedCode) { oldValue, newValue in
                         if let code = newValue {
                             showSafari = false
-//                            print("Code reçu: \(code)")
                             Task {
                                 await oAuth.getToken(code: code)
                                 showSafari = false

@@ -50,6 +50,3 @@ struct ProjectListView: View {
     }
 }
 
-//#Preview {
-//    ProjectListView()
-//}

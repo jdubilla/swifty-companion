@@ -20,7 +20,8 @@ struct UserLevelBarView: View {
     
     var body: some View {
         HStack {
-            Spacer().frame(width: leftPadding)
+            Spacer()
+                .frame(width: leftPadding)
             ZStack(alignment: .leading) {
                 GeometryReader { geometry in
                     Rectangle()
@@ -45,7 +46,6 @@ struct UserLevelBarView: View {
                             .offset(x: -70, y: -40)
                     }
                 }
-                
             }
         }
         .frame(height: 50)
@@ -56,13 +56,7 @@ struct UserLevelBarView: View {
     
     func getDecimalPart() -> Double {
         let number: Double = request?.user?.cursus_users.last?.level ?? 0.0
-//        print(number)
         let decimalPart = Double((number.truncatingRemainder(dividingBy: 1)) * 100)
-//        print(decimalPart)
         return decimalPart
     }
 }
-
-//#Preview {
-//    UserLevelBarView()
-//}

@@ -54,7 +54,6 @@ class Coordinator: NSObject, SFSafariViewControllerDelegate {
             if queryItems.count == 1, let query = queryItems.first {
                 let codeQuery = query.description.split(separator: "=")
                 if (codeQuery.count == 2 && codeQuery[0] == "code") {
-//                    print("OK Code")
                     code = String(codeQuery[1])
                     receivedCodeBinding?.wrappedValue = String(codeQuery[1])
                 }

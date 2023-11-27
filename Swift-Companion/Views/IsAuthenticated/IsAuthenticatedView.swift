@@ -22,10 +22,7 @@ struct IsAuthenticatedView: View {
                         request = APIRequest(token: token)
                     } else {
                         Task {
-                            await oAuth.checkAndFetchTokenIfNeeded()
-                            if let token = oAuth.tokenInfos {
-                                request?.token = token
-                            }
+                            await checkToken()
                         }
                     }
                 }
@@ -34,13 +31,18 @@ struct IsAuthenticatedView: View {
             UserDetails(isUserSearch: $isUserSearch, request: $request)
                 .onAppear() {
                     Task {
-                        await oAuth.checkAndFetchTokenIfNeeded()
-                        if let token = oAuth.tokenInfos {
-                            request?.token = token
-                        }
+                        await checkToken()
                     }
                 }
                 .transition(.slide)
         }
     }
+    
+    func checkToken() async {
+        await oAuth.checkAndFetchTokenIfNeeded()
+        if let token = oAuth.tokenInfos {
+            request?.token = token
+        }
+    }
+    
 }
