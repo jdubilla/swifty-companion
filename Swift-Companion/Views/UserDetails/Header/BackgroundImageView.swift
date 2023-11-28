@@ -27,6 +27,6 @@ struct BackgroundImageView: View {
 //    }
 }
 
-#Preview {
-    BackgroundImageView()
-}
+//#Preview {
+//    BackgroundImageView()
+//}

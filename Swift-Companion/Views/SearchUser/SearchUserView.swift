@@ -14,7 +14,7 @@ struct SearchUserView: View {
     
     var body: some View {
         if request?.token != nil {
-            LoadedContentView(isUserSearch: $isUserSearch, request: request)
+                LoadedContentView(isUserSearch: $isUserSearch, request: request)
         } else {
             LoadingView(request: request)
         }

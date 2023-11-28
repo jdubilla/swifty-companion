@@ -16,11 +16,27 @@ struct AuthenticatedView: View {
     
     var body: some View {
         NavigationStack {
+
+        ZStack {
+            Image("assembly_background")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .ignoresSafeArea(.all)
             VStack {
                 if !isAuthenticated {
-                    Button("Se connecter avec 42") {
+//                    Button("Se connecter avec 42") {
+//                        showSafari = true
+//                    }
+                    Button {
                         showSafari = true
+                    } label: {
+                        Text("Se connecter avec")
+                        Image("42_Logo")
+                            .resizable()
+                            .frame(width: 30, height: 30)
                     }
+                    .buttonStyle(.borderedProminent)
+                    .font(.system(size: 20))
                     .sheet(isPresented: $showSafari) {
                         SafariView(receivedCode: $receivedCode)
                     }
@@ -37,7 +53,9 @@ struct AuthenticatedView: View {
                 }
             }
         }
-        .navigationTitle("Test")
+        }
+//        .navigationTitle("Test")
+
     }
 }
 

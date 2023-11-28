@@ -24,6 +24,7 @@ struct UserDetails: View {
                 ProjectsUserView(color: $mainColor, request: $request)
                 SkillsUserView(color: $mainColor, request: $request)
                 LocationsUserView(color: $mainColor, request: $request)
+                AchievementsView(color: $mainColor, request: $request)
             }
         }
         .ignoresSafeArea(.all)

@@ -36,6 +36,6 @@ struct HeaderUserInfoView: View {
     }
 }
 
-#Preview {
-    HeaderUserInfoView(image: "envelope.circle", text: "jdubilla@student.42.fr", color: .constant(.blue))
-}
+//#Preview {
+//    HeaderUserInfoView(image: "envelope.circle", text: "jdubilla@student.42.fr", color: .constant(.blue))
+//}

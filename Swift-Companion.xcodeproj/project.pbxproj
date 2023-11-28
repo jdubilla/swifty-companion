@@ -12,6 +12,7 @@
 		2911702D2B0C05E80041DB78 /* LoadedContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2911702C2B0C05E80041DB78 /* LoadedContentView.swift */; };
 		2911702F2B0C05F60041DB78 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2911702E2B0C05F50041DB78 /* LoadingView.swift */; };
 		291BC9CB2B081B6C00D1E14B /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291BC9CA2B081B6C00D1E14B /* ImageDownloader.swift */; };
+		29205A8E2B16359C00339683 /* AchievementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29205A8D2B16359C00339683 /* AchievementsView.swift */; };
 		29496E6F2B0A512F00764AE5 /* ProjectsUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29496E6E2B0A512F00764AE5 /* ProjectsUserView.swift */; };
 		29496E712B0A739B00764AE5 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29496E702B0A739B00764AE5 /* ViewExtension.swift */; };
 		29496E732B0A78F200764AE5 /* SectionUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29496E722B0A78F200764AE5 /* SectionUserView.swift */; };
@@ -66,6 +67,7 @@
 		2911702C2B0C05E80041DB78 /* LoadedContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadedContentView.swift; sourceTree = "<group>"; };
 		2911702E2B0C05F50041DB78 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		291BC9CA2B081B6C00D1E14B /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
+		29205A8D2B16359C00339683 /* AchievementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsView.swift; sourceTree = "<group>"; };
 		29496E6E2B0A512F00764AE5 /* ProjectsUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsUserView.swift; sourceTree = "<group>"; };
 		29496E702B0A739B00764AE5 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		29496E722B0A78F200764AE5 /* SectionUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionUserView.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				29848FAD2B0B832800A265A9 /* TextStatusProjectView.swift */,
 				29848FAF2B0B8A3000A265A9 /* SkillsUserView.swift */,
 				295D574E2B0F961F00D09E68 /* LocationsUserView.swift */,
+				29205A8D2B16359C00339683 /* AchievementsView.swift */,
 			);
 			path = UserDetails;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 				29917B862B05651F00A867F2 /* UserDetails.swift in Sources */,
 				29CD62B52B14C6AE007A56FD /* CloseButtonView.swift in Sources */,
 				29496E732B0A78F200764AE5 /* SectionUserView.swift in Sources */,
+				29205A8E2B16359C00339683 /* AchievementsView.swift in Sources */,
 				29496E752B0A7B6700764AE5 /* ProjectListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

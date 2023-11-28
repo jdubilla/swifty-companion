@@ -20,6 +20,19 @@ struct User: Decodable {
     var wallet: Int
     var cursus_users: [CursusUser]
     var projects_users: [ProjectsUsers]
+    var achievements: [Achievements]
+}
+
+struct Achievements: Decodable, Identifiable {
+    var id: Int
+    var name: String
+    var description: String
+    var tier: String
+    var kind: String
+    var visible: Bool
+    var image: String
+    var nbr_of_success: Int?
+    var users_url: String
 }
 
 struct ProjectsUsers: Decodable, Identifiable {

@@ -32,6 +32,6 @@ struct SectionUserView: View {
     }
 }
 
-#Preview {
-    SectionUserView(text: "Projets", color: .constant(.orange))
-}
+//#Preview {
+//    SectionUserView(text: "Projets", color: .constant(.orange))
+//}

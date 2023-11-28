@@ -18,6 +18,6 @@ struct LogoCoalitionView: View {
     }
 }
 
-#Preview {
-    LogoCoalitionView()
-}
+//#Preview {
+//    LogoCoalitionView()
+//}

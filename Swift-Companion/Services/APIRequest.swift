@@ -32,17 +32,16 @@ class APIRequest {
         let (data, _) = try await URLSession.shared.data(for: request)
         let decoder = JSONDecoder()
         
-        let currUser = try decoder.decode(User.self, from: data)
-
+        var currUser = try decoder.decode(User.self, from: data)
+        
+        for index in 0..<currUser.achievements.count {
+            currUser.achievements[index].image = currUser.achievements[index].image.replacingOccurrences(of: "/uploads", with: "https://cdn.intra.42.fr")
+        }
+        
         return currUser
     }
     
     func coalitionsData(username: String) async throws -> [Coalition]? {
-        
-        print("1")
-        print(username)
-        print(token.access_token)
-        print("2")
         
         let url = URL(string: "https://api.intra.42.fr/v2/users/\(username.lowercased())/coalitions")!
         

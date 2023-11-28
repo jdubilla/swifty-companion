@@ -34,6 +34,6 @@ struct LoaderView: View {
     }
 }
 
-#Preview {
-    LoaderView()
-}
+//#Preview {
+//    LoaderView()
+//}
