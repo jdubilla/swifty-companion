@@ -49,6 +49,7 @@ class Coordinator: NSObject, SFSafariViewControllerDelegate {
     }
 
     func safariViewController(_ controller: SFSafariViewController, initialLoadDidRedirectTo URL: URL) {
+        print("OK")
         
         if let queryItems = URLComponents(string: URL.absoluteString)?.queryItems {
             if queryItems.count == 1, let query = queryItems.first {
