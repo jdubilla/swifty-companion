@@ -44,7 +44,15 @@ struct UserLevelBarView: View {
                             .clipShape(Circle())
                             .shadow(radius: 10, x: 10, y: 10)
                             .offset(x: -70, y: -40)
-                    }
+					} else {
+						Image(systemName: "person.circle.fill")
+							.resizable()
+							.aspectRatio(contentMode: .fill)
+							.frame(width: 80, height: 80)
+							.clipShape(Circle())
+							.shadow(radius: 10, x: 10, y: 10)
+							.offset(x: -70, y: -40)
+					}
                 }
             }
         }

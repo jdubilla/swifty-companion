@@ -16,7 +16,7 @@ struct LoaderView: View {
             GeometryReader { geometry in
                 
                 ZStack {
-                    Image("assembly_background")
+                    Image("background42")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .ignoresSafeArea(.all)

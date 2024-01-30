@@ -8,16 +8,14 @@
 import SwiftUI
 
 struct LogoCoalitionView: View {
-    
-    var imageUrl: String?
-    
-    var body: some View {
-        VStack(alignment: .center) {
-            SVGImage(url: URL(string: imageUrl ?? "")!)
-        }.frame(width: 100)
-    }
-}
 
-//#Preview {
-//    LogoCoalitionView()
-//}
+	var imageUrl: String
+
+	var body: some View {
+		VStack(alignment: .center) {
+			if let url = URL(string: imageUrl) {
+				SVGImage(url: url)
+			}
+		}.frame(width: 100)
+	}
+}

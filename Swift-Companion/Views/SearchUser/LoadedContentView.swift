@@ -20,7 +20,7 @@ struct LoadedContentView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                Image("assembly_background")
+                Image("background42")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .ignoresSafeArea(.all)
@@ -39,8 +39,8 @@ struct LoadedContentView: View {
                         }
                         .autocorrectionDisabled()
                         .onChange(of: username) { oldValue, newValue in
-                            if newValue.count > 15 {
-                                username = String(newValue.prefix(15))
+                            if newValue.count > 17 {
+                                username = String(newValue.prefix(17))
                             }
                         }
                     Button("Rechercher") {

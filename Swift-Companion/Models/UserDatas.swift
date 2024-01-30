@@ -59,7 +59,7 @@ struct Project: Decodable, Identifiable {
 }
 
 struct ImageUser: Decodable {
-    var link: String
+    var link: String?
 }
 
 struct CursusUser: Decodable {
@@ -78,7 +78,7 @@ struct Skills: Decodable, Hashable {
 struct Coalition: Decodable {
     let id: Int
     let imageUrl: String
-    let coverUrl: String
+    let coverUrl: String?
     let color: String
     
     enum CodingKeys: String, CodingKey {

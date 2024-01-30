@@ -12,7 +12,13 @@ struct BackgroundImageView: View {
     var background: Image?
 
 //    let bgImageDownloader: ImageDownloader = ImageDownloader()
-    
+
+//	if (background != null) {
+//		print("NOT NULL")
+//	} else {
+//		print("NULL !!!")
+//	}
+
     var body: some View {
         if background != nil {
             background!
@@ -20,7 +26,14 @@ struct BackgroundImageView: View {
                 .aspectRatio(contentMode: .fill)
                 .frame(height: 200)
                 .clipped()
-        }
+		} else {
+			Image("background42")
+				.resizable()
+				.aspectRatio(contentMode: .fill)
+				.frame(height: 200)
+				.clipped()
+
+		}
     }
 //        .onAppear() {
 //        bgImageDownloader.getImage(path: request?.coalitions?.last?.coverUrl ?? "")

@@ -19,6 +19,9 @@ struct HeaderView: View {
         ZStack {
             BackgroundImageView(background: bgImageDownloader.image)
             HStack {
+//				if let imageUrl = request?.coalitions?.last?.imageUrl {
+//					LogoCoalitionView(imageUrl: imageUrl)
+//				}
                 LogoCoalitionView(imageUrl: request?.coalitions?.last?.imageUrl ?? "")
                 OtherInfosUserView(request: $request, mainColor: $mainColor)
                 CloseButtonView(isUserSearch: $isUserSearch)

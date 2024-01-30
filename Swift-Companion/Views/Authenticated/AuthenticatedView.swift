@@ -18,7 +18,7 @@ struct AuthenticatedView: View {
         NavigationStack {
             
             ZStack {
-                Image("assembly_background")
+                Image("background42")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .ignoresSafeArea(.all)

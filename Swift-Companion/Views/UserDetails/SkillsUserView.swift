@@ -31,12 +31,12 @@ struct SkillsUserView: View {
                                 .foregroundStyle(color)
                         }
                     }
-                    .chartYScale(domain: 0...21)
+                    .chartYScale(domain: 0...26)
                 }
                 .frame(minWidth: 1000, minHeight: 200)
             }
             else {
-                    Text("Pas de skills (pour l'instant 👀)")
+				Text("Pas de skills (pour l'instant 👀)")
             }
         }
         .padding()
