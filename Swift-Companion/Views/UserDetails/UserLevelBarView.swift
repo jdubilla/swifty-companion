@@ -11,13 +11,14 @@ struct UserLevelBarView: View {
     
     @Binding var color: Color
     @Binding var request: APIRequest?
-    
+	var geometry: GeometryProxy
+
     let maxLevel: Double = 100
-    
-    let userImageDownloader: ImageDownloader = ImageDownloader()
+
+	@ObservedObject var userImageDownloader: ImageDownloader = ImageDownloader()
+
     let leftPadding: CGFloat = 80
-    
-    
+
     var body: some View {
         HStack {
             Spacer()
@@ -31,7 +32,6 @@ struct UserLevelBarView: View {
                     Rectangle()
                         .frame(width: min(CGFloat((getDecimalPart() / self.maxLevel) * (geometry.size.width)), geometry.size.width), height: 20)
                         .foregroundColor(color)
-                    
                     Text(String(request?.user?.cursus_users.last?.level ?? 0.0))
                         .foregroundStyle(.white)
                         .fontWeight(.bold)
@@ -57,9 +57,14 @@ struct UserLevelBarView: View {
             }
         }
         .frame(height: 50)
-        .onAppear() {
-            userImageDownloader.getImage(path: request?.user?.image.link ?? "")
-        }
+		.onChange(of: geometry.size) {
+			print("Image link changed")
+			userImageDownloader.getImage(path: request?.user?.image.link ?? "")
+		}
+		.onAppear() {
+			print("onAppear")
+			userImageDownloader.getImage(path: request?.user?.image.link ?? "")
+		}
     }
     
     func getDecimalPart() -> Double {

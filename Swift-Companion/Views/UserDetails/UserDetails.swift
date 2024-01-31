@@ -17,28 +17,25 @@ struct UserDetails: View {
     @State var mainColor: Color = .orange
     
     var body: some View {
-        VStack(spacing: 0) {
-            HeaderView(isUserSearch: $isUserSearch, request: $request, mainColor: $mainColor)
-            UserLevelBarView(color: $mainColor, request: $request)
-            ScrollView(.vertical) {
-                ProjectsUserView(color: $mainColor, request: $request)
-                SkillsUserView(color: $mainColor, request: $request)
-                LocationsUserView(color: $mainColor, request: $request)
-                AchievementsView(color: $mainColor, request: $request)
-            }
-        }
-        .ignoresSafeArea(.all)
-        .onAppear() {
-            if let color = request?.coalitions?.last?.color {
-                mainColor = Color(hex: color)
-            } else {
-                mainColor = Color.orange
-            }
-        }
+		GeometryReader { geometry in
+			VStack(spacing: 0) {
+				HeaderView(isUserSearch: $isUserSearch, request: $request, mainColor: $mainColor, geometry: geometry)
+				UserLevelBarView(color: $mainColor, request: $request, geometry: geometry)
+				ScrollView(.vertical) {
+					ProjectsUserView(color: $mainColor, request: $request)
+					SkillsUserView(color: $mainColor, request: $request)
+					LocationsUserView(color: $mainColor, request: $request)
+					AchievementsView(color: $mainColor, request: $request)
+				}
+			}
+			.ignoresSafeArea(.all)
+			.onAppear() {
+				if let color = request?.coalitions?.last?.color {
+					mainColor = Color(hex: color)
+				} else {
+					mainColor = Color.orange
+				}
+			}
+		}.ignoresSafeArea(.all)
     }
 }
-
-//#Preview {
-//    UserDetails(isUserSearch: .constant(true), request: .constant(APIRequest()))
-//}
-

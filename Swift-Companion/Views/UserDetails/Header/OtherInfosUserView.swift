@@ -11,20 +11,23 @@ struct OtherInfosUserView: View {
     
     @Binding var request: APIRequest?
     @Binding var mainColor: Color
-    
+	var geometry: GeometryProxy
+
     var body: some View {
         VStack(alignment: .leading) {
-            Spacer().frame(height: 25)
+			Spacer().frame(height: shouldAdjustHeight(in: geometry) ? 3 : 25)
             if let user = request?.user {
                 HeaderUserInfoView(image: "person.fill", text: user.login, color: $mainColor)
                 HeaderUserInfoView(image: "envelope.circle", text: user.email, color: $mainColor)
-                HeaderUserInfoView(image: "dollarsign.circle.fill", text: "\(String(user.wallet)) ₳", color: $mainColor)
+				if (!shouldAdjustHeight(in: geometry)) {
+					HeaderUserInfoView(image: "dollarsign.circle.fill", text: "\(String(user.wallet)) ₳", color: $mainColor)
+				}
                 HeaderUserInfoView(image: "pc", text: String(user.location ?? " Unavailable"), color: $mainColor)
             }
         }.frame(maxWidth: 240)
     }
-}
 
-//#Preview {
-//    OtherInfosUserView()
-//}
+	private func shouldAdjustHeight(in geometry: GeometryProxy) -> Bool {
+		return geometry.size.width > geometry.size.height
+	}
+}

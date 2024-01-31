@@ -13,7 +13,7 @@ struct LoadedContentView: View {
     var request: APIRequest?
     
     @State var disabled = false
-    @State var username = ""
+    @State var username = "jdubilla"
     @State var showAlert = false
     @FocusState private var textfieldFocused: Bool
     

@@ -8,38 +8,27 @@
 import SwiftUI
 
 struct BackgroundImageView: View {
-    
-    var background: Image?
 
-//    let bgImageDownloader: ImageDownloader = ImageDownloader()
+	var background: Image?
+	var geometry: GeometryProxy
 
-//	if (background != null) {
-//		print("NOT NULL")
-//	} else {
-//		print("NULL !!!")
-//	}
+	var body: some View {
+			if background != nil {
+				background!
+					.resizable()
+					.aspectRatio(contentMode: .fill)
+					.frame(height: shouldAdjustHeight(in: geometry) ? 100 : 200)
+					.clipped()
+			} else {
+				Image("background42")
+					.resizable()
+					.aspectRatio(contentMode: .fill)
+					.frame(height: shouldAdjustHeight(in: geometry) ? 100 : 200)
+					.clipped()
+			}
+	}
 
-    var body: some View {
-        if background != nil {
-            background!
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(height: 200)
-                .clipped()
-		} else {
-			Image("background42")
-				.resizable()
-				.aspectRatio(contentMode: .fill)
-				.frame(height: 200)
-				.clipped()
-
-		}
-    }
-//        .onAppear() {
-//        bgImageDownloader.getImage(path: request?.coalitions?.last?.coverUrl ?? "")
-//    }
+	private func shouldAdjustHeight(in geometry: GeometryProxy) -> Bool {
+		return geometry.size.width > geometry.size.height
+	}
 }
-
-//#Preview {
-//    BackgroundImageView()
-//}
