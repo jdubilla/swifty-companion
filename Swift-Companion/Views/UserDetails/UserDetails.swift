@@ -22,7 +22,7 @@ struct UserDetails: View {
 				HeaderView(isUserSearch: $isUserSearch, request: $request, mainColor: $mainColor, geometry: geometry)
 				UserLevelBarView(color: $mainColor, request: $request, geometry: geometry)
 				ScrollView(.vertical) {
-					ProjectsUserView(color: $mainColor, request: $request)
+					ProjectsUserView(color: $mainColor, request: $request, geometry: geometry)
 					SkillsUserView(color: $mainColor, request: $request)
 					LocationsUserView(color: $mainColor, request: $request)
 					AchievementsView(color: $mainColor, request: $request)

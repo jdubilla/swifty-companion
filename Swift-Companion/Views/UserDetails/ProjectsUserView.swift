@@ -11,7 +11,8 @@ struct ProjectsUserView: View {
     
     @Binding var color: Color
     @Binding var request: APIRequest?
-    
+	var geometry: GeometryProxy
+
     @State var indexPicker = 0
     @State var maxCursusId: Int = 0
     
@@ -37,11 +38,11 @@ struct ProjectsUserView: View {
                         if (indexPicker == 0 &&
                             project.status == "finished" &&
                             project.cursus_ids.contains(maxCursusId)) {
-                            ProjectListView(project: project, color: color)
+                            ProjectListView(project: project, color: color, isPortraitMode: shouldAdjustHeight(in: geometry))
                         } else if (indexPicker == 1 &&
                                    project.status != "finished" &&
                                    project.cursus_ids.contains(maxCursusId)) {
-                            ProjectListView(project: project, color: color)
+                            ProjectListView(project: project, color: color, isPortraitMode: shouldAdjustHeight(in: geometry))
                         }
                     }
                 }.padding(.top)
@@ -54,5 +55,9 @@ struct ProjectsUserView: View {
         .padding()
         .frame(maxHeight: 300)
     }
+
+	private func shouldAdjustHeight(in geometry: GeometryProxy) -> Bool {
+		return geometry.size.width > geometry.size.height
+	}
 }
 

@@ -13,10 +13,11 @@ struct LoadedContentView: View {
     var request: APIRequest?
     
     @State var disabled = false
-    @State var username = "jdubilla"
+    @State var username = ""
     @State var showAlert = false
     @FocusState private var textfieldFocused: Bool
-    
+	@State var errorMessage: String = ""
+
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -25,6 +26,7 @@ struct LoadedContentView: View {
                     .aspectRatio(contentMode: .fill)
                     .ignoresSafeArea(.all)
                     .frame(width: geometry.size.width, height: geometry.size.height)
+
                 VStack(spacing: 20) {
                     TextField("Login", text: $username)
                         .padding()
@@ -40,8 +42,9 @@ struct LoadedContentView: View {
                         .autocorrectionDisabled()
                         .onChange(of: username) { oldValue, newValue in
                             if newValue.count > 17 {
-                                username = String(newValue.prefix(17))
+								username = String(newValue.prefix(17))
                             }
+							username = username.lowercased()
                         }
                     Button("Rechercher") {
                             searchUser()
@@ -54,7 +57,7 @@ struct LoadedContentView: View {
                 .alert("Erreur", isPresented: $showAlert) {
                     
                 } message: {
-                    Text("Utilisateur introuvable")
+                    Text(errorMessage)
                 }
             }
         }
@@ -63,17 +66,33 @@ struct LoadedContentView: View {
     func searchUser() {
         Task {
             disabled = true
-            await request?.fetchDataUser(username: username)
-            disabled = false
-            if request?.user != nil {
-                withAnimation {
-                    isUserSearch = true
-                }
-            } else {
-                textfieldFocused = false
-                showAlert = true
-                username = ""
-            }
+			do {
+				try await request?.fetchDataUser(username: username)
+				disabled = false
+					withAnimation {
+						isUserSearch = true
+					}
+			} catch {
+				textfieldFocused = false
+				handleFetchError(error)
+				showAlert = true
+				username = ""
+				disabled = false
+			}
+
         }
     }
+
+	func handleFetchError(_ error: Error) {
+		switch error {
+		case NetworkError.network:
+			print("Network Error")
+			errorMessage = "Erreur de connection a l'api"
+		case NetworkError.userNotFound:
+			errorMessage = "Utilisateur introuvable"
+			print("Utilisateur inttrouvable")
+		default:
+			errorMessage = "Une erreur est survenue, veuillez essayer plus tard"
+		}
+	}
 }

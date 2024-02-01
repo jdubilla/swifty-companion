@@ -29,6 +29,8 @@ struct CloseButtonView: View {
                     .foregroundStyle(colorCrossButton)
             }
             Spacer()
-        }.frame(width: 40, height: 200)
+        }
+		.frame(width: 40, height: 200)
+		.padding(.trailing, 10)
     }
 }

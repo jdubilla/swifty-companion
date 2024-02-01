@@ -20,16 +20,13 @@ struct HeaderView: View {
 		ZStack {
 			BackgroundImageView(background: bgImageDownloader.image, geometry: geometry)
 			HStack {
-				LogoCoalitionView(imageUrl: request?.coalitions?.last?.imageUrl ?? "")
-				Rectangle()
-					.frame(width: shouldAdjustHeight(in: geometry) ? 180 : 0)
-					.opacity(0)
+				LogoCoalitionView(imageUrl: request?.coalitions?.last?.imageUrl ?? "", isPortraitMode: shouldAdjustHeight(in: geometry))
+				Spacer()
 				OtherInfosUserView(request: $request, mainColor: $mainColor, geometry: geometry)
-				Rectangle()
-					.frame(width: shouldAdjustHeight(in: geometry) ? 200 : 0)
-					.opacity(0)
+				Spacer()
 				CloseButtonView(isUserSearch: $isUserSearch)
 			}.frame(maxWidth: .infinity, maxHeight: shouldAdjustHeight(in: geometry) ? 100 : 200)
+				.foregroundStyle(.black)
 		}
 		.onChange(of: geometry.size) {
 			bgImageDownloader.getImage(path: request?.coalitions?.last?.coverUrl ?? "")

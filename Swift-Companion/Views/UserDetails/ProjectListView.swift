@@ -11,7 +11,8 @@ struct ProjectListView: View {
     
     var project: ProjectsUsers
     var color: Color
-    
+	var isPortraitMode: Bool
+
     var body: some View {
         HStack {
             Text(project.project.name)
@@ -33,7 +34,7 @@ struct ProjectListView: View {
                 TextStatusProjectView(text: "En attente de correction", color: .yellow)
             }
         }
-        .padding(4)
+		.padding(EdgeInsets(top: 4, leading: isPortraitMode ? 35 : 0, bottom: 4, trailing: isPortraitMode ? 35 : 0))
         .listRowSeparator(.hidden)
         .background(getBackgroundColor())
         .clipShape(RoundedRectangle(cornerRadius: 5))

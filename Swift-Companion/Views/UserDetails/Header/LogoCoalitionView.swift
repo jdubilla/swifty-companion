@@ -10,12 +10,15 @@ import SwiftUI
 struct LogoCoalitionView: View {
 
 	var imageUrl: String
+	var isPortraitMode: Bool
 
 	var body: some View {
 		VStack(alignment: .center) {
 			if let url = URL(string: imageUrl) {
 				SVGImage(url: url)
 			}
-		}.frame(width: 100)
+		}
+		.frame(width: 100)
+		.padding(.leading, isPortraitMode ? 75 : 0)
 	}
 }

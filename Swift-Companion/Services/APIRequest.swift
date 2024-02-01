@@ -23,16 +23,19 @@ class APIRequest {
     func userData(username: String) async throws -> User? {
 
         let url = URL(string: "https://api.intra.42.fr/v2/users/\(username.lowercased())")!
-        
         var request = URLRequest(url: url)
-
         request.setValue("Bearer \(token.access_token)", forHTTPHeaderField: "Authorization")
 
-        let (data, _) = try await URLSession.shared.data(for: request)
+		guard let (data, _) = try? await URLSession.shared.data(for: request) else {
+			throw NetworkError.network
+		}
+
         let decoder = JSONDecoder()
-        
-        var currUser = try decoder.decode(User.self, from: data)
-        
+
+		guard var currUser = try? decoder.decode(User.self, from: data) else {
+			throw NetworkError.userNotFound
+		}
+
         for index in 0..<currUser.achievements.count {
             currUser.achievements[index].image = currUser.achievements[index].image.replacingOccurrences(of: "/uploads", with: "https://cdn.intra.42.fr")
         }
@@ -48,11 +51,15 @@ class APIRequest {
 
             request.setValue("Bearer \(token.access_token)", forHTTPHeaderField: "Authorization")
 
-        let (data, _) = try await URLSession.shared.data(for: request)
+		guard let (data, _) = try? await URLSession.shared.data(for: request) else {
+			throw NetworkError.network
+		}
         let decoder = JSONDecoder()
         
-        var coaUser = try decoder.decode([Coalition].self, from: data)
-        
+		guard var coaUser = try? decoder.decode([Coalition].self, from: data) else {
+			throw NetworkError.userNotFound
+		}
+
         let elementsToMove = coaUser.filter { [45, 46, 47, 48].contains($0.id) }
         coaUser = coaUser.filter { ![45, 46, 47, 48].contains($0.id) }
         coaUser.append(contentsOf: elementsToMove)
@@ -65,23 +72,29 @@ class APIRequest {
         
         var request = URLRequest(url: url)
         request.setValue("Bearer \(token.access_token)", forHTTPHeaderField: "Authorization")
-        let (data, _) = try await URLSession.shared.data(for: request)
+		guard let (data, _) = try? await URLSession.shared.data(for: request) else {
+			throw NetworkError.network
+		}
         let decoder = JSONDecoder()
-        let locations = try decoder.decode([Location].self, from: data)
-        
+
+		guard let locations = try? decoder.decode([Location].self, from: data) else {
+			throw NetworkError.userNotFound
+		}
+
         return locations
     }
     
-    func fetchDataUser(username: String) async {
-        do {
+    func fetchDataUser(username: String) async throws {
             isFinish = false
             self.user = try await userData(username: username)
             self.coalitions = try await coalitionsData(username: username)
             try await Task.sleep(nanoseconds: 1_000_000_000)
             self.locations = try await locationsUser(username: username)
             isFinish = true
-        } catch {
-            self.user = nil
-        }
     }
+}
+
+enum NetworkError: Error {
+	case network
+	case userNotFound
 }
