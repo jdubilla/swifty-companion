@@ -16,11 +16,7 @@ struct SearchUserView: View {
         if request?.token != nil {
                 LoadedContentView(isUserSearch: $isUserSearch, request: request)
         } else {
-            LoadingView(request: request)
+            LoadingView()
         }
     }
 }
-
-//#Preview {
-//    SearchUserView(isUserSearch: .constant(false), request: .constant(APIRequest()))
-//}

@@ -22,7 +22,3 @@ struct TextStatusProjectView: View {
             .clipShape(RoundedCorner(radius: 5))
     }
 }
-
-//#Preview {
-//    TextStatusProjectView()
-//}

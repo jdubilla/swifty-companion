@@ -65,7 +65,6 @@ class OAuthManager {
                     let decoder = JSONDecoder()
                     
                     let tokenResponse = try decoder.decode(ApiToken.self, from: data)
-                    print(tokenResponse)
                     self.tokenInfos = tokenResponse
                     self.isAuthenticated = true
                 } catch {

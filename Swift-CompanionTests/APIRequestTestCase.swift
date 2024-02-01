@@ -33,7 +33,6 @@ final class APIRequestTestCase: XCTestCase {
     func testCoalitionsData() async throws {
         do {
             let coalitions: [Coalition]? = try await apiRequest.coalitionsData(username: validUsername)
-            print(coalitions ?? "NOPPPPPPPPPPP")
             XCTAssertNotNil(coalitions, "Coalitions should not be nil")
         } catch {
             XCTFail("Error fetching coalitions: \(error.localizedDescription)")

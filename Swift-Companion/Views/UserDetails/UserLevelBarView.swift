@@ -58,11 +58,9 @@ struct UserLevelBarView: View {
         }
         .frame(height: 50)
 		.onChange(of: geometry.size) {
-			print("Image link changed")
 			userImageDownloader.getImage(path: request?.user?.image.link ?? "")
 		}
 		.onAppear() {
-			print("onAppear")
 			userImageDownloader.getImage(path: request?.user?.image.link ?? "")
 		}
     }

@@ -11,7 +11,6 @@ class ImageDownloader: ObservableObject {
 	@Published var image: Image?
 
     func getImage(path: String) {
-		print("Func getImage")
         if let url: URL = URL(string: path) {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 DispatchQueue.main.async {
@@ -21,7 +20,6 @@ class ImageDownloader: ObservableObject {
                     }
                     if let data = data {
                         if let ui = UIImage(data: data) {
-							print("ImageOk")
                             self.image = Image(uiImage: ui)
                         } else {
                             self.image = nil

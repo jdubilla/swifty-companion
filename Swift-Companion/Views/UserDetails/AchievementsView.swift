@@ -48,7 +48,3 @@ struct AchievementsView: View {
 			.frame(maxHeight: 300)
 	}
 }
-
-//#Preview {
-//    AchievementsView()
-//}

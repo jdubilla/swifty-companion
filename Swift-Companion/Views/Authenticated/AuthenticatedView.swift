@@ -53,7 +53,3 @@ struct AuthenticatedView: View {
         }
     }
 }
-
-//#Preview {
-//    AuthenticatedView()
-//}

@@ -9,18 +9,9 @@ import SwiftUI
 
 struct LoadingView: View {
     
-    var request: APIRequest?
-
     var body: some View {
         VStack {
             Text("Chargement")
         }
-        .onAppear() {
-//            request.checkAndFetchTokenIfNeeded()
-        }
     }
 }
-
-//#Preview {
-//    LoadingView()
-//}

@@ -32,7 +32,3 @@ struct CloseButtonView: View {
         }.frame(width: 40, height: 200)
     }
 }
-
-//#Preview {
-//    CloseButtonView()
-//}

@@ -17,7 +17,6 @@ class APIRequest {
     var locations: [Location]?
     
     init(token: ApiToken) {
-        print(token.access_token)
         self.token = token
     }
     
@@ -77,14 +76,12 @@ class APIRequest {
         do {
             isFinish = false
             self.user = try await userData(username: username)
-//			print(self.user)
             self.coalitions = try await coalitionsData(username: username)
             try await Task.sleep(nanoseconds: 1_000_000_000)
             self.locations = try await locationsUser(username: username)
             isFinish = true
         } catch {
             self.user = nil
-            print("Error: User not found")
         }
     }
 }

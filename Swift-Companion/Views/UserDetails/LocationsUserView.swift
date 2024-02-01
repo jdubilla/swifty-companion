@@ -72,7 +72,3 @@ struct LocationsUserView: View {
         return ""
     }
 }
-
-//#Preview {
-//    LocationsUserView()
-//}

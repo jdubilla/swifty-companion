@@ -48,9 +48,7 @@ class Coordinator: NSObject, SFSafariViewControllerDelegate {
         self.receivedCodeBinding = receivedCode
     }
 
-    func safariViewController(_ controller: SFSafariViewController, initialLoadDidRedirectTo URL: URL) {
-        print("OK")
-        
+    func safariViewController(_ controller: SFSafariViewController, initialLoadDidRedirectTo URL: URL) {        
         if let queryItems = URLComponents(string: URL.absoluteString)?.queryItems {
             if queryItems.count == 1, let query = queryItems.first {
                 let codeQuery = query.description.split(separator: "=")

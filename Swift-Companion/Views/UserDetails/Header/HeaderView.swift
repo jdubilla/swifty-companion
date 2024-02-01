@@ -32,7 +32,6 @@ struct HeaderView: View {
 			}.frame(maxWidth: .infinity, maxHeight: shouldAdjustHeight(in: geometry) ? 100 : 200)
 		}
 		.onChange(of: geometry.size) {
-			print("Image link changed")
 			bgImageDownloader.getImage(path: request?.coalitions?.last?.coverUrl ?? "")
 		}
 		.onAppear() {

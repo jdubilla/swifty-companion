@@ -35,7 +35,3 @@ struct HeaderUserInfoView: View {
         .clipShape(RoundedRectangle(cornerRadius: 5))
     }
 }
-
-//#Preview {
-//    HeaderUserInfoView(image: "envelope.circle", text: "jdubilla@student.42.fr", color: .constant(.blue))
-//}
