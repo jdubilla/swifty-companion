@@ -54,6 +54,13 @@ struct UserLevelBarView: View {
 							.offset(x: -70, y: -40)
 					}
                 }
+				if let user = request?.user {
+					let fullName = user.first_name + " " + user.last_name
+						Text(fullName)
+							.offset(y: 7)
+							.foregroundStyle(color)
+							.bold()
+				}
             }
         }
         .frame(height: 50)

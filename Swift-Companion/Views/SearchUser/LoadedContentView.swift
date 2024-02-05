@@ -13,7 +13,7 @@ struct LoadedContentView: View {
     var request: APIRequest?
     
     @State var disabled = false
-    @State var username = ""
+    @State var username = "jdubilla"
     @State var showAlert = false
     @FocusState private var textfieldFocused: Bool
 	@State var errorMessage: String = ""
@@ -90,7 +90,7 @@ struct LoadedContentView: View {
 			errorMessage = "Erreur de connection a l'api"
 		case NetworkError.userNotFound:
 			errorMessage = "Utilisateur introuvable"
-			print("Utilisateur inttrouvable")
+			print("Utilisateur introuvable")
 		default:
 			errorMessage = "Une erreur est survenue, veuillez essayer plus tard"
 		}
