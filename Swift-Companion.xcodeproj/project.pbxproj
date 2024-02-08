@@ -47,7 +47,6 @@
 		29CD62C72B14E393007A56FD /* ApiToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CD62AA2B14C254007A56FD /* ApiToken.swift */; };
 		29CD62C92B14F1C9007A56FD /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29917B802B05406E00A867F2 /* TokenResponse.swift */; };
 		29CD62CA2B14F1CC007A56FD /* UserDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CD62A82B14C215007A56FD /* UserDatas.swift */; };
-		ED4E9C5E2B756AE400E47815 /* InfosAPI.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED4E9C5D2B756AE400E47815 /* InfosAPI.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,7 +99,6 @@
 		29CD62B42B14C6AE007A56FD /* CloseButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButtonView.swift; sourceTree = "<group>"; };
 		29CD62BB2B14D9E7007A56FD /* Swift-CompanionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swift-CompanionTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		29CD62C42B14DA5F007A56FD /* APIRequestTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestTestCase.swift; sourceTree = "<group>"; };
-		ED4E9C5D2B756AE400E47815 /* InfosAPI.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = InfosAPI.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,7 +243,6 @@
 				29917B682B05172300A867F2 /* Swift_CompanionApp.swift */,
 				29917B6C2B05172500A867F2 /* Assets.xcassets */,
 				29917B6E2B05172500A867F2 /* Preview Content */,
-				ED4E9C5D2B756AE400E47815 /* InfosAPI.plist */,
 			);
 			path = "Swift-Companion";
 			sourceTree = "<group>";
@@ -361,7 +358,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED4E9C5E2B756AE400E47815 /* InfosAPI.plist in Resources */,
 				29917B702B05172500A867F2 /* Preview Assets.xcassets in Resources */,
 				29917B6D2B05172500A867F2 /* Assets.xcassets in Resources */,
 			);
