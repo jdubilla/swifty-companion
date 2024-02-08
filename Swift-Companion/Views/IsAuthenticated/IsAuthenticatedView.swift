@@ -28,13 +28,15 @@ struct IsAuthenticatedView: View {
                 }
                 .transition(.opacity)
         } else {
-            UserDetails(isUserSearch: $isUserSearch, request: $request)
-                .onAppear() {
-                    Task {
-                        await checkToken()
+            GeometryReader { geometry in
+                UserDetails(isUserSearch: $isUserSearch, request: $request, geometry: geometry)
+                    .onAppear() {
+                        Task {
+                            await checkToken()
+                        }
                     }
-                }
-                .transition(.slide)
+                    .transition(.slide)
+            }
         }
     }
     

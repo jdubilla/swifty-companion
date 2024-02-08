@@ -34,7 +34,6 @@ struct HeaderView: View {
 		.onAppear() {
 			bgImageDownloader.getImage(path: request?.coalitions?.last?.coverUrl ?? "")
 		}
-		.ignoresSafeArea(.all)
 	}
 
 	private func shouldAdjustHeight(in geometry: GeometryProxy) -> Bool {

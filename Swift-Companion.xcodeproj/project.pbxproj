@@ -35,7 +35,6 @@
 		29917B702B05172500A867F2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29917B6F2B05172500A867F2 /* Preview Assets.xcassets */; };
 		29917B772B05173600A867F2 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29917B762B05173600A867F2 /* APIRequest.swift */; };
 		29917B812B05406E00A867F2 /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29917B802B05406E00A867F2 /* TokenResponse.swift */; };
-		29917B842B0548B900A867F2 /* InfosAPI.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29917B832B0548B900A867F2 /* InfosAPI.plist */; };
 		29917B862B05651F00A867F2 /* UserDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29917B852B05651F00A867F2 /* UserDetails.swift */; };
 		29CD62A92B14C215007A56FD /* UserDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CD62A82B14C215007A56FD /* UserDatas.swift */; };
 		29CD62AB2B14C254007A56FD /* ApiToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CD62AA2B14C254007A56FD /* ApiToken.swift */; };
@@ -46,9 +45,9 @@
 		29CD62C52B14DA5F007A56FD /* APIRequestTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CD62C42B14DA5F007A56FD /* APIRequestTestCase.swift */; };
 		29CD62C62B14E360007A56FD /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29917B762B05173600A867F2 /* APIRequest.swift */; };
 		29CD62C72B14E393007A56FD /* ApiToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CD62AA2B14C254007A56FD /* ApiToken.swift */; };
-		29CD62C82B14EBFB007A56FD /* InfosAPI.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29917B832B0548B900A867F2 /* InfosAPI.plist */; };
 		29CD62C92B14F1C9007A56FD /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29917B802B05406E00A867F2 /* TokenResponse.swift */; };
 		29CD62CA2B14F1CC007A56FD /* UserDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CD62A82B14C215007A56FD /* UserDatas.swift */; };
+		ED4E9C5E2B756AE400E47815 /* InfosAPI.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED4E9C5D2B756AE400E47815 /* InfosAPI.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,7 +91,6 @@
 		29917B762B05173600A867F2 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		29917B7C2B0531C700A867F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		29917B802B05406E00A867F2 /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
-		29917B832B0548B900A867F2 /* InfosAPI.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = InfosAPI.plist; sourceTree = "<group>"; };
 		29917B852B05651F00A867F2 /* UserDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetails.swift; sourceTree = "<group>"; };
 		29CD62A82B14C215007A56FD /* UserDatas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDatas.swift; sourceTree = "<group>"; };
 		29CD62AA2B14C254007A56FD /* ApiToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiToken.swift; sourceTree = "<group>"; };
@@ -102,6 +100,7 @@
 		29CD62B42B14C6AE007A56FD /* CloseButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButtonView.swift; sourceTree = "<group>"; };
 		29CD62BB2B14D9E7007A56FD /* Swift-CompanionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swift-CompanionTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		29CD62C42B14DA5F007A56FD /* APIRequestTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestTestCase.swift; sourceTree = "<group>"; };
+		ED4E9C5D2B756AE400E47815 /* InfosAPI.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = InfosAPI.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,7 +245,7 @@
 				29917B682B05172300A867F2 /* Swift_CompanionApp.swift */,
 				29917B6C2B05172500A867F2 /* Assets.xcassets */,
 				29917B6E2B05172500A867F2 /* Preview Content */,
-				29917B832B0548B900A867F2 /* InfosAPI.plist */,
+				ED4E9C5D2B756AE400E47815 /* InfosAPI.plist */,
 			);
 			path = "Swift-Companion";
 			sourceTree = "<group>";
@@ -362,7 +361,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29917B842B0548B900A867F2 /* InfosAPI.plist in Resources */,
+				ED4E9C5E2B756AE400E47815 /* InfosAPI.plist in Resources */,
 				29917B702B05172500A867F2 /* Preview Assets.xcassets in Resources */,
 				29917B6D2B05172500A867F2 /* Assets.xcassets in Resources */,
 			);
@@ -372,7 +371,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29CD62C82B14EBFB007A56FD /* InfosAPI.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

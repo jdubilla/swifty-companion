@@ -11,6 +11,7 @@ struct LocationsUserView: View {
     
     @Binding var color: Color
     @Binding var request: APIRequest?
+    var isPortraitMode: Bool
     
     var body: some View {
         VStack {
@@ -26,7 +27,8 @@ struct LocationsUserView: View {
                         } else {
                             Text("Session en cours")
                         }
-                    }
+                    }.padding(EdgeInsets(top: 4, leading: isPortraitMode ? 35 : 0, bottom: 4, trailing: isPortraitMode ? 35 : 0))
+
                 }.listStyle(.plain)
             } else {
                 Text("Rien à afficher 😢")

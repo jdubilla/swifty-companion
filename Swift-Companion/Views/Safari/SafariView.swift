@@ -12,7 +12,7 @@ private func getApiUID() -> String {
     guard let filePath = Bundle.main.path(forResource: "InfosAPI", ofType: "plist"),
           let plist = NSDictionary(contentsOfFile: filePath),
           let value = plist.object(forKey: "API_UID") as? String else {
-        fatalError("Couldn't find key API_UID in 'Info'.")
+        return ""
     }
     return value
 }
@@ -20,6 +20,7 @@ private func getApiUID() -> String {
 struct SafariView: UIViewControllerRepresentable {
     var code: String?
     @Binding var receivedCode: String?
+    var apiUid = getApiUID()
     
     let url = URL(string: "https://api.intra.42.fr/oauth/authorize?client_id=\(getApiUID())&redirect_uri=https://www.google.com/&response_type=code")!
     
@@ -35,7 +36,6 @@ struct SafariView: UIViewControllerRepresentable {
     func makeCoordinator() -> Coordinator {
         Coordinator(receivedCode: $receivedCode)
     }
-
 }
 
 

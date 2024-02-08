@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     @State var oAuth: OAuthManager = OAuthManager()
-
+    
     var body: some View {
         if !oAuth.isAuthenticated {
             AuthenticatedView(oAuth: $oAuth)
